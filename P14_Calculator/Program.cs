@@ -18,10 +18,10 @@
 
             // Get operation
             Console.Write("Enter operation (+, -, *, /): ");
-            string? operation = Console.ReadLine();
-            if (string.IsNullOrEmpty(operation) || "+-*/".IndexOf(operation) == -1)
+            string? operation = Console.ReadLine()?.Trim();
+            if (string.IsNullOrEmpty(operation) || operation.Length != 1 || !"+-*/".Contains(operation))
             {
-                Console.WriteLine("Invalid operation. Please use +, -, *, or /");
+                Console.WriteLine("Invalid operation. Please enter a single character: +, -, *, or /");
                 continue;
             }
 
