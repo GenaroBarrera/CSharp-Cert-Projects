@@ -100,11 +100,11 @@ Console.WriteLine(result); */
 // because it rounds up the way you would expect.
 
 //Compare casting and converting a decimal into an int
-int value = (int)1.5m; // casting truncates
+/* int value = (int)1.5m; // casting truncates
 Console.WriteLine(value);
 
 int value2 = Convert.ToInt32(1.5m); // converting rounds up
-Console.WriteLine(value2);
+Console.WriteLine(value2); */
 
 // When you're casting int value = (int)1.5m;, the value of the float is truncated so the result is 1, meaning the value
 // after the decimal is ignored completely. You could change the literal float to 1.999m and the result of casting would
@@ -124,3 +124,95 @@ the literal value to 1.499m, it would be rounded down to 1. */
  
  - Casting vs. Converting: Casting truncates values (e.g., decimal to int), while converting rounds values (e.g., decimal to int using Convert.ToInt32()).
  */
+
+/*  //TryParse() a string into an int
+string value = "bad";
+int result = 0;
+if (int.TryParse(value, out result))
+{
+    Console.WriteLine($"Measurement: {result}");
+}
+else
+{
+    Console.WriteLine("Unable to report the measurement.");
+}
+
+Console.WriteLine(result); //outputs 0 since the conversion failed, meaning result was never changed from its initial value of 0
+
+if (result > 0)
+    Console.WriteLine($"Measurement (w/ offset): {50 + result}"); */
+
+/* When calling a method with an out parameter, you must use the keyword out before the variable, which holds the value.
+The out parameter is assigned to the result variable in the code (int.TryParse(value, out result). You can then use the
+value the out parameter contains throughout the rest of your code using the variable result.
+
+The converted value is stored in the int variable result. The int variable result is declared and initialized before
+this line of code, so it should be accessible both inside the code blocks that belong to the if and else statements, as
+well as outside of them. */
+
+// Use TryParse() when converting a string into a numeric data type. TryParse() returns true if the conversion is
+// successful, false if it's unsuccessful.
+
+//***Complete a challenge to combine string array values as strings and as integers***
+
+/* string[] values = { "12.3", "45", "ABC", "11", "DEF" };
+
+//initialize message and sum variables
+String message = ""; 
+double sum = 0;
+
+if (values != null && values.Length > 0) //checks that the array is not null and has at least one element 
+{
+    foreach (string s in values) //iterate through each string in the array
+    {
+        //first try to parse s as an double
+        if (double.TryParse(s, out double doubleResult))
+        {
+            //if successful add it to sum
+            sum += doubleResult;
+        }
+        else
+        {
+            //if unsuccessful, concatenate it to message
+            message += s;
+        }
+    }
+    Console.WriteLine($"Message: {message}");
+    Console.WriteLine($"Total: {sum}");
+    // what is the $ used for in the WriteLine method? 
+    // The $ before the string indicates that the string is an interpolated string, 
+    // allowing you to embed expressions directly within the string using curly braces {}. 
+} */
+
+//***Complete a challenge to output math operations as specific number types***
+
+/* Here's a second chance to use what you've learned about casting and conversion to solve a coding challenge.
+
+The following challenge helps you to understand the implications of casting values considering the impact of narrowing
+and widening conversions. */
+
+int value1 = 11;
+decimal value2 = 6.2m; //what is the m for? //The m suffix indicates that the literal is of type decimal.
+float value3 = 4.3f; //what is the f for? //The f suffix indicates that the literal is of type float.
+
+// Your code here to set result1
+// Hint: You need to round the result to nearest integer (don't just truncate)
+//Solve for result1: Divide value1 by value2, display the result as an int 
+int result1 = Convert.ToInt32(value1 / value2);
+Console.WriteLine($"Divide value1 by value2, display the result as an int: {result1}");
+
+// Your code here to set result2
+//Solve for result2: Divide value2 by value3, display the result as a decimal
+decimal result2 = value2 / (decimal)value3;
+Console.WriteLine($"Divide value2 by value3, display the result as a decimal: {result2}");
+
+// Your code here to set result3
+//Solve for result3: Divide value3 by value1, display the result as a float
+float result3 = value3 / value1;
+Console.WriteLine($"Divide value3 by value1, display the result as a float: {result3}");
+
+// result1: Convert.ToInt32(decimal) rounds to the nearest integer, so 11 / 6.2 ≈ 1.774... becomes 2.
+// result2: (decimal)value3 and Convert.ToDecimal(value3) produce the same numeric result for normal finite floats.
+// result3: using a float for the numerator gives a float division; 4.3f / 11 prints as 0.3909091 (the default float formatting).
+
+
