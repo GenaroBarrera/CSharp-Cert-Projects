@@ -92,27 +92,27 @@ string output = "";
 const string openSpan = "<span>"; //define constant for opening span tag
 const string closeSpan = "</span>"; //define constant for closing span tag
 
-int quantityStart = input.IndexOf(openSpan) + openSpan.Length; // + length of <span> so index at end of <span> tag
-int quantityEnd= input.IndexOf(closeSpan);
-int quantityLength = quantityEnd - quantityStart;
-quantity = input.Substring(quantityStart, quantityLength);
-quantity = $"Quantity: {quantity}";
+int quantityStart = input.IndexOf(openSpan) + openSpan.Length; //get the index of <span> and add its length to get the start of the quantity value
+int quantityEnd= input.IndexOf(closeSpan); //index of </span> tag, not adding length since we want the start of </span>
+int quantityLength = quantityEnd - quantityStart; //calculate the character length of the quantity value
+quantity = input.Substring(quantityStart, quantityLength); //extract the quantity value using Substring()
+quantity = $"Quantity: {quantity}"; //format the quantity string
 
 // Set output to input, replacing the trademark symbol with the registered trademark symbol
-const string tradeSymbol = "&trade;";
-const string regSymbol = "&reg;";
-output = input.Replace(tradeSymbol, regSymbol);
+const string tradeSymbol = "&trade;"; //define constant for trademark symbol
+const string regSymbol = "&reg;"; //define constant for registered trademark symbol
+output = input.Replace(tradeSymbol, regSymbol); //replace trademark symbol with registered trademark symbol
 
 // Remove the opening <div> tag
-const string openDiv = "<div>";
-int divStart = output.IndexOf(openDiv);
-output = output.Remove(divStart, openDiv.Length);
+const string openDiv = "<div>"; //define constant for opening div tag
+int divStart = output.IndexOf(openDiv); //get the index of <div> tag
+output = output.Remove(divStart, openDiv.Length); //remove the <div> tag using Remove()
 
 // Remove the closing </div> tag and add "Output:" to the beginning
-const string closeDiv = "</div>";
-int divCloseStart = output.IndexOf(closeDiv);
-output = "Output: " + output.Remove(divCloseStart, closeDiv.Length);
+const string closeDiv = "</div>"; //define constant for closing div tag
+int divCloseStart = output.IndexOf(closeDiv); //get the index of </div> tag
+output = "Output: " + output.Remove(divCloseStart, closeDiv.Length); //remove the </div> tag using Remove() and add "Output:" to the beginning of the string
 
-Console.WriteLine(quantity);
-Console.WriteLine(output);
+Console.WriteLine(quantity); //print the quantity
+Console.WriteLine(output); //print the output
 
