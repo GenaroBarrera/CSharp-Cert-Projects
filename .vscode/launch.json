@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/P22_Debugging/bin/Debug/net9.0/P22_Debugging.dll",
+            "program": "${workspaceFolder}/P22_Debug/bin/Debug/net9.0/P22_Debug.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/P22_Debugging",
+            "cwd": "${workspaceFolder}/P22_Debug",
             "console": "internalConsole",
             "stopAtEntry": false
         }

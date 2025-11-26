@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/P22_Debugging/P22_Debug101.csproj",
+                "${workspaceFolder}/P22_Debug/P22_Debug.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
