@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/P22_Debugging/bin/Debug/net9.0/P22_Debugging.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/P22_Debugging",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}
