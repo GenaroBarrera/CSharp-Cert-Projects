@@ -1,16 +1,44 @@
-{
+//Next, Launch configurations 
+/* You've already seen that Visual Studio Code uses the launch.json file to configure the debugger. If you're creating a
+simple C# console application, it's likely that Visual Studio Code generates a launch.json file that has all of the
+information you need to successfully debug your code. However, there are cases when you need to modify a launch
+configuration, so it's important to understand the attributes of a launch configuration. */
+{ //are these curly braces necessary? 
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
+            "name": "P22_Debug", //The reader-friendly name assigned to the launch configuration. This is a mandatory attribute.
+            "type": "coreclr", //The type of debugger to use for the launch configuration. This is a mandatory attribute.
+            "request": "launch", //The request type of the launch configuration. This is a mandatory attribute.
+            "preLaunchTask": "buildP22",
             "program": "${workspaceFolder}/P22_Debug/bin/Debug/net9.0/P22_Debug.dll",
             "args": [],
             "cwd": "${workspaceFolder}/P22_Debug",
-            "console": "internalConsole",
+            "console":"integratedTerminal", //This option launches the application in the integrated terminal, which supports console input.
             "stopAtEntry": false
-        }
+        },
+        {
+            "name": "P23_DebugChallenge", //The reader-friendly name assigned to the launch configuration. This is a mandatory attribute.
+            "type": "coreclr", //The type of debugger to use for the launch configuration. This is a mandatory attribute.
+            "request": "launch", //The request type of the launch configuration. This is a mandatory attribute.
+            "preLaunchTask": "buildP23",
+            "program": "${workspaceFolder}/P23_DebugChallenge/bin/Debug/net9.0/P23_DebugChallenge.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/P23_DebugChallenge",
+            "console":"internalConsole", //This option launches the application in the DEBUG CONSOLE panel, which doesn't support console input.
+            "stopAtEntry": false
+        },
+
     ]
 }
+/* The DEBUG CONSOLE panel doesn't support console input. For example, the DEBUG CONSOLE can't be used if the
+application includes a Console.ReadLine() statement.
+
+Edit a launch configuration
+
+There are lots of scenarios when you might need to customize the launch configuration file. Many of those scenarios
+involve advanced or complex project scenarios. This module focuses on two simple scenarios when updating the launch
+configuration file is required:
+
+    Your C# console application reads input from the console.
+    Your project workspace includes more than one application.*/
