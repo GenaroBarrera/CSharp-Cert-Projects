@@ -25,7 +25,7 @@ configuration, so it's important to understand the attributes of a launch config
             "program": "${workspaceFolder}/P23_DebugChallenge/bin/Debug/net9.0/P23_DebugChallenge.dll",
             "args": [],
             "cwd": "${workspaceFolder}/P23_DebugChallenge",
-            "console":"internalConsole", //This option launches the application in the DEBUG CONSOLE panel, which doesn't support console input.
+            "console":"integratedTerminal", 
             "stopAtEntry": false
         },
 
