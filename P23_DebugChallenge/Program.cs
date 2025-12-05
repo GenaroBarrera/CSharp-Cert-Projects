@@ -55,3 +55,5 @@ do // Loop until exit is true
     num2 = num1 + rand.Next(1, 51); // Generate a second number greater than the first
 
 } while (exit == false); // End of loop. Exit is always false, so this loop runs indefinitely
+
+//commit this
