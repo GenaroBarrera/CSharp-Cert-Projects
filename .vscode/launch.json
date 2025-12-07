@@ -28,6 +28,17 @@ configuration, so it's important to understand the attributes of a launch config
             "console":"integratedTerminal", 
             "stopAtEntry": false
         },
+        {
+            "name": "P24_DebugAndHandleEx",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildP24",
+            "program": "${workspaceFolder}/P24_DebugAndHandleEx/bin/Debug/net9.0/P24_DebugAndHandleEx.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/P24_DebugAndHandleEx",
+            "console":"integratedTerminal",
+            "stopAtEntry": false
+        }
 
     ]
 }
