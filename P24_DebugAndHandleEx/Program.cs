@@ -48,7 +48,7 @@ Console.WriteLine($"Expected till value: {registerCheckTillTotal}\n\r");
 
 var valueGenerator = new Random((int)DateTime.Now.Ticks); // random number generator for item costs
 
-int transactions = 10; // number of transactions to process
+int transactions = 40; // number of transactions to process
 
 if (useTestData) // if using test data, set transactions to the length of the testData array
 {
@@ -58,7 +58,7 @@ if (useTestData) // if using test data, set transactions to the length of the te
 while (transactions > 0) // process transactions until none are left
 {
     transactions -= 1; // decrement the transaction counter
-    int itemCost = valueGenerator.Next(2, 20); // generate a random item cost between 2 and 19
+    int itemCost = valueGenerator.Next(2, 50); // generate a random item cost between 2 and 19
 
     if (useTestData) // if using test data, get the item cost from the testData array
     {
@@ -78,19 +78,30 @@ while (transactions > 0) // process transactions until none are left
     Console.WriteLine($"\t Using {paymentFives} five dollar bills");
     Console.WriteLine($"\t Using {paymentOnes} one dollar bills");
 
-    // MakeChange manages the transaction and updates the till 
-    string transactionMessage = MakeChange(itemCost, cashTill, paymentTwenties, paymentTens, paymentFives, paymentOnes);
+    try
+    {
+        // MakeChange manages the transaction and updates the till 
+        MakeChange(itemCost, cashTill, paymentTwenties, paymentTens, paymentFives, paymentOnes);
+
+        Console.WriteLine($"Transaction successfully completed.");
+        registerCheckTillTotal += itemCost; // update the expected total amount in the till
+    }
+    catch (InvalidOperationException e)
+    {
+       Console.WriteLine($"Could not complete the transaction: {e.Message}"); // display the exception message
+    }
+
 
     // Backup Calculation - each transaction adds current "itemCost" to the till
-    if (transactionMessage == "transaction succeeded") // if the transaction was successful
-    {
-        Console.WriteLine($"Transaction successfully completed.");
-        registerCheckTillTotal += itemCost;
-    }
-    else // if the transaction was unsuccessful
-    {
-        Console.WriteLine($"Transaction unsuccessful: {transactionMessage}");
-    }
+    // if (transactionMessage == "transaction succeeded") // if the transaction was successful
+    // {
+    //     Console.WriteLine($"Transaction successfully completed.");
+    //     registerCheckTillTotal += itemCost; // update the expected total amount in the till
+    // }
+    // else // if the transaction was unsuccessful
+    // {
+    //     Console.WriteLine($"Transaction unsuccessful: {transactionMessage}");
+    // }
 
     Console.WriteLine(TillAmountSummary(cashTill)); // display the amount of cash in the till
     Console.WriteLine($"Expected till value: {registerCheckTillTotal}\n\r"); // display the expected total amount in the till
@@ -117,9 +128,9 @@ static void LoadTillEachMorning(int[,] registerDailyStartingCash, int[] cashTill
 }
 
 // Manage the transaction, update the till, and return a message indicating success or failure
-static string MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, int fives = 0, int ones = 0)
+static void MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, int fives = 0, int ones = 0)
 {
-    string transactionMessage = ""; // Default to empty string, which indicates success
+    //string transactionMessage = ""; // Default to empty string, which indicates success
 
     cashTill[3] += twenties; // Add customer payment to the till
     cashTill[2] += tens; //
@@ -130,7 +141,8 @@ static string MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, i
     int changeNeeded = amountPaid - cost; // Calculate change needed by the customer
 
     if (changeNeeded < 0) // Check if the customer provided enough money
-        transactionMessage = "Not enough money provided.";
+        //transactionMessage = "Not enough money provided.";
+        throw new InvalidOperationException("InvalidOperationException: Not enough money provided to complete transaction.");
 
     Console.WriteLine("Cashier Returns:"); // Display change being returned to the customer
 
@@ -163,12 +175,12 @@ static string MakeChange(int cost, int[] cashTill, int twenties, int tens = 0, i
     }
 
     if (changeNeeded > 0) // If unable to provide exact change
-        transactionMessage = "Can't make change. Do you have anything smaller?";
+        throw new InvalidOperationException("InvalidOperationException: The till is unable to make the correct change.");
 
-    if (transactionMessage == "") // If no errors, set success message
-        transactionMessage = "transaction succeeded";
+    // if (transactionMessage == "") // If no errors, set success message
+    //     transactionMessage = "transaction succeeded";
 
-    return transactionMessage; // Return the transaction message
+    //return transactionMessage; // Return the transaction message
 }
 
 // Log the current status of the cash till
