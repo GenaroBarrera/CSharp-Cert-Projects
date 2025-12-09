@@ -200,3 +200,5 @@ static string TillAmountSummary(int[] cashTill)
     return $"The till has {cashTill[3] * 20 + cashTill[2] * 10 + cashTill[1] * 5 + cashTill[0]} dollars"; // Calculate and return the total amount in the till
 
 }
+
+//COMMIT ANYTHING YOU HAVE TO GIT BEFORE CONTINUING TO THE NEXT PATH!
