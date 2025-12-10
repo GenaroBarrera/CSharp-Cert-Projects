@@ -202,3 +202,4 @@ static string TillAmountSummary(int[] cashTill)
 }
 
 //COMMIT ANYTHING YOU HAVE TO GIT BEFORE CONTINUING TO THE NEXT PATH!
+//commit message suggestion: "P24 Debug and Handle Exceptions complete"
